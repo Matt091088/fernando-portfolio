@@ -142,7 +142,7 @@ export default function App() {
         </a>
 
         <a
-          href="/English CV Programador.pdf"
+          href="/Fernando-Tau-CV-2026.pdf"
           target="_blank"
           rel="noreferrer"
         >
