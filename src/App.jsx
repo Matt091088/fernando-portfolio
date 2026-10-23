@@ -241,18 +241,47 @@ export default function App() {
   </a>
 
 </div>
-   <div className="education-card">
+  <div className="education-card">
 
-  <h3>English Level B1</h3>
+  <h3>English Level C1</h3>
 
   <p>
-Intermediate English proficiency for reading,
-writing, communication, and technical documentation.
+    Advanced English proficiency, with the ability to
+    communicate effectively and understand technical documentation.
   </p>
 
   <a
-    href="/certificates/english-b1.pdf"
+    href="/certificates/CertificateC1.pdf"
     target="_blank"
+    rel="noreferrer"
+    className="certificate-btn"
+  >
+    View Certificate
+  </a>
+
+</div>
+
+<div className="education-card">
+
+  <h3>Introduction to AI Development</h3>
+
+  <p>
+    Completed a 6-hour training program on AI-powered
+    development and AI agents, organized by BIG school.
+  </p>
+
+  <p>
+    <strong>Institution:</strong> BIG school
+  </p>
+
+  <p>
+    <strong>Completed:</strong> October 2026
+  </p>
+
+  <a
+    href="/certificates/Certificado-desarrolloconIA.pdf"
+    target="_blank"
+    rel="noreferrer"
     className="certificate-btn"
   >
     View Certificate
