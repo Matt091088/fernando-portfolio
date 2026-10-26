@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { FaGithub, FaLinkedin, FaEnvelope } from "react-icons/fa";
@@ -5,49 +6,53 @@ import { FaGithub, FaLinkedin, FaEnvelope } from "react-icons/fa";
 import "./App.css";
 import gentiziImage from "./assets/gentiziproyect.png";
 import hotelImage from "./assets/hotel.jpg";
-import templeImage from "./assets/temple-gallery.jpg";
+import proyectaImage from "./assets/proyecta-mueble.png";
+import { translations } from "./i18n/translations";
+
 export default function App() {
+  const [curtainOpen, setCurtainOpen] = useState(false);
+  
+  console.log("PORTFOLIO ACTUALIZADO");
   const [menuOpen, setMenuOpen] = useState(false);
+  const [language, setLanguage] = useState("es");
+
+const t = translations[language];
 
   const projects = [
     {
       title: "Gentizi Ecommerce 🚀",
-      status: "Currently Developing",
-      description:
-        "Currently developing a full ecommerce platform for custom furniture featuring product catalog, shopping cart, category filters and responsive React architecture.",
-      tech:[
-  "React",
-  "JavaScript",
-  "CSS",
-  "Vite",
-  "React Router",
-  "LocalStorage"
-],
+      status: t.projects.developing,
+      description: t.projects.gentiziDescription,
+      tech: [
+        "React",
+        "JavaScript",
+        "CSS",
+        "Vite",
+        "React Router",
+        "LocalStorage",
+      ],
       image: gentiziImage,
       featured: true,
       live: "https://gentizi-ecommerce.vercel.app/",
       github: "https://github.com/Matt091088/gentizi-ecommerce",
     },
-
     {
       title: "Hotel City Posadas",
-      description:
-        "Hotel landing page with booking features and responsive layout.",
+      description: t.projects.hotelDescription,
       tech: ["HTML", "CSS", "JavaScript"],
       image: hotelImage,
       live: "https://matt091088.github.io/hotel-city-posadas/",
       github: "https://github.com/Matt091088/hotel-city-posadas",
     },
-
-    {
-  title: "Temple Gallery",
-  description:
-    "Interactive gallery project with filters and responsive design.",
-  tech: ["HTML", "CSS", "JavaScript"],
-  image: templeImage,
-  live: "https://matt091088.github.io/wdd131/temples.html",
-  github: "https://github.com/Matt091088/wdd131",
-},
+  
+     {
+     title: "Proyecta Mueble",
+     description: t.projects.proyectaDescription,
+     tech: ["React", "JavaScript", "CSS", "Responsive Design"],
+     image: proyectaImage,
+     live: "https://proyecta-muebles.vercel.app/",
+     github: "https://github.com/Matt091088/proyecta-muebles",
+    },
   ];
 
   const skills = [
@@ -63,424 +68,588 @@ export default function App() {
     "React Router",
   ];
 
-  return (
-    <div className="app">
+  const closeMenu = () => setMenuOpen(false);
 
+return (
+  <>
+    {/* CORTINA DE ENTRADA */}
+<div className="intro-curtain">
+  <motion.div
+    className="curtain-panel curtain-panel-left"
+    initial={{ x: 0 }}
+    animate={{ x: curtainOpen ? "-100%" : 0 }}
+    transition={{
+      duration: 2,
+      ease: [0.76, 0, 0.24, 1],
+      delay: curtainOpen ? 0 : 1.8,
+    }}
+    onAnimationComplete={() => {
+      if (!curtainOpen) setCurtainOpen(true);
+    }}
+  />
+
+  <motion.div
+    className="curtain-panel curtain-panel-right"
+    initial={{ x: 0 }}
+    animate={{ x: curtainOpen ? "100%" : 0 }}
+    transition={{
+      duration: 2,
+      ease: [0.76, 0, 0.24, 1],
+      delay: curtainOpen ? 0 : 0.8,
+    }}
+  />
+
+  <motion.span
+    className="curtain-name"
+    initial={{ opacity: 1, scale: 1 }}
+    animate={{
+      opacity: curtainOpen ? 0 : 1,
+      scale: curtainOpen ? 1.05 : 1,
+    }}
+    transition={{ duration: 2.5 }}
+  >
+    FERNANDO TAU<span>.</span>
+  </motion.span>
+</div>
+
+    <div className="app">
       {/* NAVBAR */}
       <nav className="navbar">
+        <a className="logo" href="#home" onClick={closeMenu}>
+          Fernando<span>.</span>
+        </a>
 
-        <h2 className="logo">Fernando Tau</h2>
-
-        <div
+        <button
           className="menu-toggle"
+          type="button"
+          aria-label="Toggle navigation menu"
+          aria-expanded={menuOpen}
           onClick={() => setMenuOpen(!menuOpen)}
         >
-          ☰
-        </div>
+          {menuOpen ? "✕" : "☰"}
+        </button>
 
-        <div className={`nav-links ${menuOpen ? "active" : ""}`}>
-          <a href="#about">About</a>
-          <a href="#education">Education</a>
-          <a href="#skills">Skills</a>
-          <a href="#projects">Projects</a>
-          <a href="#contact">Contact</a>
-        </div>
+        
+<div className={`nav-links ${menuOpen ? "active" : ""}`}>
+  <a href="#about" onClick={closeMenu}>{t.nav.about}</a>
+  <a href="#education" onClick={closeMenu}>{t.nav.education}</a>
+  <a href="#skills" onClick={closeMenu}>{t.nav.skills}</a>
+  <a href="#projects" onClick={closeMenu}>{t.nav.projects}</a>
+  <a href="#contact" onClick={closeMenu}>{t.nav.contact}</a>
+
+  <div className="language-switch">
+    <button
+      type="button"
+      className={language === "es" ? "active" : ""}
+      onClick={() => setLanguage("es")}
+      aria-pressed={language === "es"}
+    >
+      ES
+    </button>
+
+    <span aria-hidden="true">|</span>
+
+    <button
+      type="button"
+      className={language === "en" ? "active" : ""}
+      onClick={() => setLanguage("en")}
+      aria-pressed={language === "en"}
+    >
+      EN
+    </button>
+  </div>
+</div>
 
       </nav>
+
+      {/* HERO: PRESENTACIÓN Y FOTO GRANDE */}
       <motion.section
-  className="hero"
-  initial={{ opacity: 0, y: 50 }}
-  animate={{ opacity: 1, y: 0 }}
-  transition={{ duration: 0.8 }}
->
-  <div className="hero-content">
+        id="home"
+        className="hero"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.8 }}
+      >
+        <div className="hero-content">
+          <div className="hero-left">
+            <p className="hero-eyebrow">
+                    {t.hero.eyebrow}
+            </p>
 
-    <div className="hero-left">
+            <h1>
+              Fernando
+              <span className="gradient-text"> Tau.</span>
+            </h1>
 
-      <h1>Fernando Tau</h1>
+            <p className="subtitle">
+              {t.hero.subtitle}
+            </p>
 
-      <p className="subtitle">
-        Frontend Developer | React & JavaScript
-      </p>
-     
+            <p className="hero-description">
+                {t.hero.description}
+            </p>
 
-      <section id="about" className="section">
+            <div className="hero-buttons">
+             <a href="#projects" className="btn btn-primary">
+             {t.hero.projectsButton}
+            </a>
 
-  <h2>About Me</h2>
+              <a
+                href="https://www.linkedin.com/in/fernando-tau/"
+                target="_blank"
+                rel="noreferrer"
+                className="btn btn-secondary"
+              >
+                {t.hero.linkedin} ↗
+              </a>
 
-  <p>
-    Frontend Developer passionate about building modern and responsive web applications.
-    Currently studying Software Engineering and developing real-world projects using
-    React, JavaScript, HTML and CSS.
-  </p>
+              <a
+                href={
+                 language === "es"
+                ? "/Fernando-Tau-CV-2026-ES.pdf"
+                : "/Fernando-Tau-CV-2026.pdf"
+                   }
+                download
+                className="btn btn-text"
+                >
+                {t.hero.downloadCV} ↓
+              </a>
+            </div>
 
-  <p>
-    I enjoy creating clean user interfaces, improving user experiences and continuously
-    learning new technologies. My goal is to grow as a professional developer while
-    building projects that solve real problems.
-  </p>
+            <div className="stats">
+              <div className="stat">
+                <h3>03</h3>
+                {t.hero.projectsStat}
+              </div>
 
-</section>
+              <div className="stat">
+                <h3>React</h3>
+                {t.hero.focusStat}
+              </div>
 
-      <div className="hero-buttons">
+              <div className="stat">
+                <h3>100%</h3>
+                {t.hero.motivationStat}
+              </div>
+            </div>
 
-        <a
-          href="https://github.com/Matt091088"
-          target="_blank"
-          rel="noreferrer"
-        >
-          GitHub
-        </a>
+            <div className="hero-socials">
+              <a
+                href="https://github.com/Matt091088"
+                target="_blank"
+                rel="noreferrer"
+                aria-label="GitHub"
+              >
+                <FaGithub />
+              </a>
 
-        <a
-          href="https://www.linkedin.com/in/fernando-tau/"
-          target="_blank"
-          rel="noreferrer"
-          className="secondary-btn"
-        >
-          LinkedIn
-        </a>
+              <a
+                href="https://www.linkedin.com/in/fernando-tau/"
+                target="_blank"
+                rel="noreferrer"
+                aria-label="LinkedIn"
+              >
+                <FaLinkedin />
+              </a>
 
-        <a
-          href="/Fernando-Tau-CV-2026.pdf"
-          target="_blank"
-          rel="noreferrer"
-        >
-          Download CV
-        </a>
+              <a
+                href="mailto:fernandomatiastau@gmail.com"
+                aria-label="Email"
+              >
+                <FaEnvelope />
+              </a>
+            </div>
+          </div>
 
-        <div className="stats">
+          {/* FOTO Y ROBOT */}
+          <div className="hero-right">
+            <div className="profile-image-container">
+              <img
+                src="/images/fernando-profile.png"
+                alt="Fernando Tau - Frontend Developer"
+                className="profile-image"
+              />
+            </div>
 
-  <div>
-    <h3>3+</h3>
-    <span>Projects</span>
-  </div>
+            <div className="hero-image-gradient" />
 
-  <div>
-    <h3>3+</h3>
-    <span>Years Learning</span>
-  </div>
-
-  <div>
-    <h3>100%</h3>
-    <span>Passion</span>
-  </div>
-</div>
-
-      </div>
-
+            {/* INTERFAZ HOLOGRÁFICA */}
+{/* VENTANA DE CÓDIGO ANIMADA */}
+<div className="code-window">
+  <div className="code-window-header">
+    <div className="window-dots">
+      <span />
+      <span />
+      <span />
     </div>
 
-    <div className="hero-right">
+    <span className="code-filename">portfolio.jsx</span>
+    <span className="code-status">● LIVE</span>
+  </div>
 
-      <div className="spline-container">
-        <iframe
-          src="https://my.spline.design/nexbotrobotcharacterconcept-O34orRtG0OMNieyVwCIgDQ66/"
-          frameBorder="0"
-          width="100%"
-          height="100%"
-          title="Spline Animation"
-        ></iframe>
+  <div className="code-content">
+    <div><span className="line-number">01</span> <span className="code-purple">const</span> <span className="code-blue">developer</span> = {"{"}</div>
+    <div><span className="line-number">02</span> &nbsp; name: <span className="code-green">"Fernando Tau"</span>,</div>
+    <div><span className="line-number">03</span> &nbsp; role: <span className="code-green">"Frontend Developer"</span>,</div>
+    <div><span className="line-number">04</span> &nbsp; skills: [<span className="code-green">"React"</span>, <span className="code-green">"JS"</span>],</div>
+    <div><span className="line-number">05</span> &nbsp; learning: <span className="code-orange">true</span></div>
+    <div><span className="line-number">06</span> {"};"}</div>
+    <div className="code-output">
+      <span className="code-prompt">➜</span> Building something great
+      <span className="typing-cursor">|</span>
+    </div>
+  </div>
+</div>
+
+<div className="floating-tech floating-react">⚛ React</div>
+<div className="floating-tech floating-js">JS JavaScript</div>
+<div className="floating-tech floating-css">✦ CSS</div>
+<div className="floating-tech floating-html">🌐 HTML5</div>
+<div className="floating-tech floating-git">⑂ Git</div>
+<div className="floating-tech floating-github">⌘ GitHub</div>
+<div className="floating-tech floating-vite">⚡ Vite</div>
+
+
+      <div className="image-caption">
+  <span className="status-dot" />
+  <span>Building digital experiences</span>
+</div>
+
+{/* VISTA PREVIA DE PROYECTOS */}
+<div className="hero-projects-preview">
+  <div className="hero-projects-heading">
+    <span>01 — SELECTED WORK</span>
+    <a href="#projects">Ver todos ↗</a>
+  </div>
+
+  <a
+    href="#projects"
+    className="hero-project-mini"
+  >
+    <img src={gentiziImage} alt="Proyecto Gentizi Ecommerce" />
+    <div>
+      <span>ECOMMERCE</span>
+      <h3>Gentizi</h3>
+      <p>React · JavaScript · CSS</p>
+    </div>
+    <span className="hero-project-arrow">↗</span>
+  </a>
+
+  <a
+    href="#projects"
+    className="hero-project-mini"
+  >
+    <img src={hotelImage} alt="Proyecto Hotel City" />
+    <div>
+      <span>WEB DESIGN</span>
+      <h3>Hotel City</h3>
+      <p>HTML · CSS · JavaScript</p>
+    </div>
+    <span className="hero-project-arrow">↗</span>
+  </a>
+
+  <a
+    href="#projects"
+    className="hero-project-mini"
+  >
+    <img src={proyectaImage} alt="Proyecto Proyecta Mueble" />
+    <div>
+      <span>WEB DEVELOPMENT</span>
+      <h3>Proyecta Mueble</h3>
+      <p>React · Responsive Design</p>
+    </div>
+    <span className="hero-project-arrow">↗</span>
+  </a>
+</div>
+</div>
+</div>
+
+        <a className="scroll-indicator" href="#about">
+          <span>SCROLL TO EXPLORE</span>
+          <span className="scroll-line" />
+        </a>
+      </motion.section>
+
+      {/* ABOUT */}
+<section id="about" className="section">
+  <div className="container">
+    <div className="about-content">
+      <div className="about-text">
+        <p className="section-eyebrow">{t.about.eyebrow}</p>
+
+        <h2 className="section-title">
+          {t.about.titleStart}{" "}
+          <span className="gradient-text">{t.about.titleEnd}</span>
+        </h2>
+
+        <p>{t.about.paragraph1}</p>
+        <p>{t.about.paragraph2}</p>
       </div>
 
-    </div>
-
-  </div>
-</motion.section>
-
-      {/* EDUCATION */}
-<section id="education" className="section">
-
-  <h2>Education & Certifications</h2>
-
-  <div className="education-card">
-
-    <h3>Software Engineering Student</h3>
-
-    <p>
-      Currently studying Software Engineering with a focus on
-      frontend development, React, JavaScript, and modern web technologies.
-    </p>
-
-  </div>
-
-  <div className="education-card">
-
-  <h3>Web and Computer Programming Certificate</h3>
-
-  <p>
-    Completed coursework focused on programming fundamentals,
-    web development, JavaScript, HTML, CSS, and software development practices.
-  </p>
-
-  <a
-    href="/certificates/web-programming.pdf"
-    target="_blank"
-    className="certificate-btn"
-  >
-    View Certificate
-  </a>
-
-</div>
-
-  <div className="education-card">
-
-  <h3>BYU Pathway Worldwide</h3>
-
-  <p>
-    Completed academic courses focused on professional development,
-    communication, problem solving, and technology skills.
-  </p>
-
-  <a
-    href="/certificates/byu-pathway.pdf"
-    target="_blank"
-    className="certificate-btn"
-  >
-    View Certificate
-  </a>
-
-</div>
-  <div className="education-card">
-
-  <h3>English Level C1</h3>
-
-  <p>
-    Advanced English proficiency, with the ability to
-    communicate effectively and understand technical documentation.
-  </p>
-
-  <a
-    href="/certificates/CertificateC1.pdf"
-    target="_blank"
-    rel="noreferrer"
-    className="certificate-btn"
-  >
-    View Certificate
-  </a>
-
-</div>
-
-<div className="education-card">
-
-  <h3>Introduction to AI Development</h3>
-
-  <p>
-    Completed a 6-hour training program on AI-powered
-    development and AI agents, organized by BIG school.
-  </p>
-
-  <p>
-    <strong>Institution:</strong> BIG school
-  </p>
-
-  <p>
-    <strong>Completed:</strong> October 2026
-  </p>
-
-  <a
-    href="/certificates/Certificado-desarrolloconIA.pdf"
-    target="_blank"
-    rel="noreferrer"
-    className="certificate-btn"
-  >
-    View Certificate
-  </a>
-
-</div>
-
-<section className="section">
-
-  <h2>Currently Building</h2>
-
-  <div className="education-card">
-
-    <h3>Gentizi Ecommerce</h3>
-
-    <p>
-      Currently developing a full ecommerce platform for custom furniture.
-      Features include product catalog, shopping cart, category filters,
-      responsive design and modern React architecture.
-    </p>
-
-  </div>
-
-</section>
-
-</section>
-
-      {/* SKILLS */}
-      <section id="skills" className="section">
-
-        <h2>Skills</h2>
-
-        <div className="skills-grid">
-
-          {skills.map((skill, index) => (
-
-            <motion.div
-              key={index}
-              className="skill-card"
-              initial={{ opacity: 0, scale: 0.8 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              transition={{ delay: index * 0.05 }}
-              viewport={{ once: true }}
-            >
-              {skill}
-            </motion.div>
-
-          ))}
-
+      <div className="about-details">
+        <div className="about-card">
+          <span className="about-card-number">01</span>
+          <h3>{t.about.card1Title}</h3>
+          <p>{t.about.card1Description}</p>
         </div>
 
+        <div className="about-card">
+          <span className="about-card-number">02</span>
+          <h3>{t.about.card2Title}</h3>
+          <p>{t.about.card2Description}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+           {/* EDUCATION */}
+      <section id="education" className="section section-alt">
+        <div className="container">
+          <p className="section-eyebrow">{t.education.eyebrow}</p>
+
+          <h2 className="section-title">
+            {t.education.titleStart}{" "}
+            <span className="gradient-text">{t.education.titleEnd}</span>
+          </h2>
+
+          <div className="education-grid">
+            <article className="education-card">
+              <span className="card-label">{t.education.current}</span>
+              <h3>{t.education.softwareTitle}</h3>
+              <p>{t.education.softwareDescription}</p>
+            </article>
+
+            <article className="education-card">
+              <span className="card-label">{t.education.completed}</span>
+              <h3>{t.education.certificateTitle}</h3>
+<p>{t.education.certificateDescription}</p>
+              <a
+                href="/certificates/web-programming.pdf"
+                target="_blank"
+                rel="noreferrer"
+                className="text-link"
+              >
+                {t.education.viewCertificate} ↗
+              </a>
+            </article>
+
+            <article className="education-card">
+              <span className="card-label">{t.education.completed}</span>
+              <h3>{t.education.pathwayTitle}</h3>
+<p>{t.education.pathwayDescription}</p>
+              <a
+                href="/certificates/byu-pathway.pdf"
+                target="_blank"
+                rel="noreferrer"
+                className="text-link"
+              >
+                {t.education.viewCertificate} ↗
+              </a>
+            </article>
+
+            <article className="education-card">
+              <span className="card-label">{t.education.language}</span>
+              <h3>{t.education.englishTitle}</h3>
+<p>{t.education.englishDescription}</p>
+              <a
+                href="/certificates/CertificateC1.pdf"
+                target="_blank"
+                rel="noreferrer"
+                className="text-link"
+              >
+                {t.education.viewCertificate} ↗
+              </a>
+            </article>
+
+            <article className="education-card">
+              <span className="card-label">{t.education.completedDate}</span>
+              <h3>{t.education.aiTitle}</h3>
+              <p>{t.education.aiDescription}</p>
+              <p className="institution">
+                <strong>{t.education.institution}</strong> BIG school
+              </p>
+              <a
+                href="/certificates/Certificado-desarrolloconIA.pdf"
+                target="_blank"
+                rel="noreferrer"
+                className="text-link"
+              >
+                {t.education.viewCertificate} ↗
+              </a>
+            </article>
+
+            <article className="education-card featured-education">
+              <span className="card-label">{t.education.current}</span>
+              <h3>{t.education.gentiziTitle}</h3>
+              <p>{t.education.gentiziDescription}</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+            {/* SKILLS */}
+      <section id="skills" className="section">
+        <div className="container">
+          <p className="section-eyebrow">{t.skills.eyebrow}</p>
+
+          <h2 className="section-title">
+            {t.skills.titleStart}{" "}
+            <span className="gradient-text">{t.skills.titleEnd}</span>
+          </h2>
+
+          <p className="section-description">
+            {t.skills.description}
+          </p>
+
+          <div className="skills-grid">
+            {skills.map((skill, index) => (
+              <motion.div
+                key={skill}
+                className="skill-card"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.04 }}
+                viewport={{ once: true }}
+              >
+                <span className="skill-number">
+                  {String(index + 1).padStart(2, "0")}
+                </span>
+                <span>{skill}</span>
+              </motion.div>
+            ))}
+          </div>
+        </div>
       </section>
 
       {/* PROJECTS */}
-      <section id="projects" className="section">
+      <section id="projects" className="section section-alt">
+        <div className="container">
+          <p className="section-eyebrow">{t.projects.eyebrow}</p>
 
-        <h2>Projects</h2>
+<h2 className="section-title">
+  {t.projects.titleStart}{" "}
+  <span className="gradient-text">{t.projects.titleEnd}</span>
+</h2>
 
-        <div className="projects-grid">
+<p className="section-description">
+  {t.projects.description}
+</p>
 
-          {projects.map((project, index) => (
+          <div className="projects-grid">
+            {projects.map((project, index) => (
+              <motion.article
+                key={project.title}
+                className={`project-card ${
+                  project.featured ? "featured" : ""
+                }`}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: index * 0.12 }}
+                viewport={{ once: true }}
+                whileHover={{ y: -6 }}
+              >
+                <div className="project-image-wrapper">
+                  <img
+                    src={project.image}
+                    alt={project.title}
+                    className="project-image"
+                    loading="lazy"
+                  />
+                  {project.status && (
+                    <span className="project-status">{project.status}</span>
+                  )}
+                </div>
 
-            <motion.div
-              key={index}
-              className={`project-card ${
-                project.featured ? "featured" : ""
-              }`}
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{
-                duration: 0.5,
-                delay: index * 0.2,
-              }}
-              viewport={{ once: true }}
-              whileHover={{ scale: 1.03 }}
-            >
+                <div className="project-info">
+                  <h3>{project.title}</h3>
+                  <p>{project.description}</p>
 
-              {project.image && (
-                <img
-                  src={project.image}
-                  alt={project.title}
-                  className="project-image"
-                />
-              )}
+                  <div className="tech-list">
+                    {project.tech.map((tech) => (
+                      <span key={tech}>{tech}</span>
+                    ))}
+                  </div>
 
-              <h3>{project.title}</h3>
+                  <div className="project-links">
+                    <a
+                      href={project.live}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="live-btn"
+                    >
+                      {t.projects.liveDemo} ↗
+                    </a>
 
-              <p>{project.description}</p>
-
-              <div className="tech-list">
-
-                {project.tech.map((tech, i) => (
-                  <span key={i}>{tech}</span>
-                ))}
-
-              </div>
-
-              <div className="project-links">
-
-                <a
-                  href={project.live}
-                  target="_blank"
-                  className="live-btn"
-                >
-                  Live Demo
-                </a>
-
-                <a
-                  href={project.github}
-                  target="_blank"
-                  className="github-btn"
-                >
-                  GitHub
-                </a>
-
-              </div>
-
-            </motion.div>
-
-          ))}
-
+                    <a
+                      href={project.github}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="github-btn"
+                    >
+                      <FaGithub /> {t.projects.sourceCode}
+                    </a>
+                  </div>
+                </div>
+              </motion.article>
+            ))}
+          </div>
         </div>
-
       </section>
 
+      {/* CONTACT */}
       <section id="contact" className="section contact">
+        <div className="container contact-content">
+        
 
-  <h2>Contact</h2>
+         <p className="section-eyebrow">{t.contact.eyebrow}</p>
 
-  <p>
-    Interested in working together or discussing opportunities?
-  </p>
+<h2 className="section-title">
+  {t.contact.titleStart}{" "}
+  <span className="gradient-text">{t.contact.titleEnd}</span>
+</h2>
 
-  <div className="contact-links">
+<p>{t.contact.description}</p>
 
-    <a
-      href="mailto:fernandomatiastau@gmail.com"
-      target="_blank"
-      rel="noreferrer"
-    >
-      <FaEnvelope />
-      Email
-    </a>
+          <div className="contact-links">
+            <a href="mailto:fernandomatiastau@gmail.com" className="btn btn-primary">
+              <FaEnvelope /> {t.contact.emailButton}
+            </a>
 
-    <a
-      href="https://github.com/Matt091088"
-      target="_blank"
-      rel="noreferrer"
-    >
-      <FaGithub />
-      GitHub
-    </a>
+            <a
+              href="https://github.com/Matt091088"
+              target="_blank"
+              rel="noreferrer"
+              className="btn btn-secondary"
+            >
+              <FaGithub /> GitHub
+            </a>
 
-    <a
-      href="https://www.linkedin.com/in/fernando-tau/"
-      target="_blank"
-      rel="noreferrer"
-    >
-      <FaLinkedin />
-      LinkedIn
-    </a>
-
-  </div>
-
-</section>
+            <a
+              href="https://www.linkedin.com/in/fernando-tau/"
+              target="_blank"
+              rel="noreferrer"
+              className="btn btn-secondary"
+            >
+              <FaLinkedin /> LinkedIn
+            </a>
+          </div>
+        </div>
+      </section>
 
       {/* FOOTER */}
-      <footer className="footer">
+<footer className="footer">
+  <a className="logo" href="#home">
+    Fernando<span>.</span>
+  </a>
 
-        <h3>Fernando Tau</h3>
+  <p>{t.footer.description}</p>
 
-        <p>
-          Frontend Developer focused on React and modern UI.
-        </p>
-
-        <div className="footer-links">
-
-          <a
-            href="https://github.com/Matt091088"
-            target="_blank"
-          >
-            GitHub
-          </a>
-
-          <a
-            href="https://www.linkedin.com/in/fernando-tau/"
-            target="_blank"
-          >
-            LinkedIn
-          </a>
-
-        </div>
-
-        <span>
-          © 2026 Fernando Tau. All rights reserved.
-        </span>
-
-      </footer>
-
-    </div>
+  <span>
+    © 2026 Fernando Tau. {t.footer.rights}
+  </span>
+</footer>
+      </div>
+    </>
   );
 }
