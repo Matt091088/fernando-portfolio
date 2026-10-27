@@ -258,7 +258,7 @@ export default function App() {
           }}
         >
           {/* Contenedor que organiza las dos columnas del hero */}
-          <div className="hero-content">
+          <div className="hero-content hero-mobile-layout">
             {/* Texto decorativo de fondo */}
             
 <motion.div
@@ -334,17 +334,18 @@ export default function App() {
                 </a>
 
                 {/* Descarga el CV según el idioma seleccionado */}
-                <a
-                  href={
-                    language === "es"
-                      ? "/Fernando-Tau-CV-2026-ES.pdf"
-                      : "/Fernando-Tau-CV-2026.pdf"
-                  }
-                  download
-                  className="btn btn-text"
-                >
-                  {t.hero.downloadCV} ↓
-                </a>
+<a
+  href={
+    language === "es"
+      ? "/Fernando-Tau-CV-2026-ES.pdf"
+      : "/Fernando-Tau-CV-2026.pdf"
+  }
+  download
+  className="btn btn-download-cv"
+>
+  <span>{t.hero.downloadCV}</span>
+  <span className="cv-download-icon">↓</span>
+</a>
               </div>
 
               {/* Indicadores destacados del perfil */}
@@ -423,93 +424,29 @@ export default function App() {
   },
 }}
 >
-  {/* Foto de perfil con animación independiente */}
+{/* Silueta de Fernando con animación independiente */}
 <motion.div
   className="profile-cutout-motion"
-  initial={{ opacity: 0, y: 180, scale: 0.82 }}
-  animate={{ opacity: 1, y: 0, scale: 1 }}
-  transition={{
-    duration: 1,
-    delay: 0.4,
-    ease: [0.22, 1.4, 0.36, 1],
+  initial={{ opacity: 0, y: 600, scale: 0.65 }}
+animate={{ opacity: 1, y: 0, scale: 1 }}
+transition={{
+  duration: 1.8,
+  delay: 0.4,
+  ease: [0.22, 1.8, 0.36, 1],
   }}
 >
-  <div className="profile-image-container">
-    <img
-      src="/images/fernando-profile.png"
-      alt="Fernando Tau - Frontend Developer"
-      className="profile-image"
-    />
-  </div>
+  <img
+    src="/images/fernando-cutout.png"
+    alt="Fernando Tau - Frontend Developer"
+    className="profile-cutout"
+  />
 </motion.div>
 
               {/* Capa decorativa que acompaña a la fotografía */}
               <div className="hero-image-gradient" />
 
-              {/* ----------------------------------------------
-                  VENTANA DE CÓDIGO DECORATIVA
-                  Simula un editor mostrando información
-                  del desarrollador.
-                  ---------------------------------------------- */}
 
-              <div className="code-window">
-                {/* Cabecera de la ventana */}
-                <div className="code-window-header">
-                  <div className="window-dots">
-                    <span />
-                    <span />
-                    <span />
-                  </div>
-
-                  <span className="code-filename">portfolio.jsx</span>
-                  <span className="code-status">● LIVE</span>
-                </div>
-
-                {/* Código ilustrativo */}
-                <div className="code-content">
-                  <div>
-                    <span className="line-number">01</span>{" "}
-                    <span className="code-purple">const</span>{" "}
-                    <span className="code-blue">developer</span> = {"{"}
-                  </div>
-
-                  <div>
-                    <span className="line-number">02</span>
-                    &nbsp; name:{" "}
-                    <span className="code-green">"Fernando Tau"</span>,
-                  </div>
-
-                  <div>
-                    <span className="line-number">03</span>
-                    &nbsp; role:{" "}
-                    <span className="code-green">"Frontend Developer"</span>,
-                  </div>
-
-                  <div>
-                    <span className="line-number">04</span>
-                    &nbsp; skills: [
-                    <span className="code-green">"React"</span>,{" "}
-                    <span className="code-green">"JS"</span>],
-                  </div>
-
-                  <div>
-                    <span className="line-number">05</span>
-                    &nbsp; learning:{" "}
-                    <span className="code-orange">true</span>
-                  </div>
-
-                  <div>
-                    <span className="line-number">06</span> {"};"}
-                  </div>
-
-                  {/* Mensaje decorativo debajo del código */}
-                  <div className="code-output">
-                    <span className="code-prompt">➜</span>{" "}
-                    Building something great
-                    <span className="typing-cursor">|</span>
-                  </div>
-                </div>
-              </div>
+      
 
               {/* ----------------------------------------------
                   ETIQUETAS FLOTANTES DE TECNOLOGÍAS

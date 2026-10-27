@@ -401,6 +401,10 @@ img {
   min-height: 600px;
   overflow: visible;
   background: transparent;
+  background-image: url("/images/fernando-cover.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 .profile-image-container {
@@ -1487,10 +1491,17 @@ img {
   }
 
   .hero-left {
-    order: 1;
-    padding: 65px 24px 35px;
-    background: var(--bg-main);
-  }
+  order: 1;
+  position: relative;
+  z-index: 3;
+  padding: 65px 24px 35px;
+  background: linear-gradient(
+    180deg,
+    rgba(8, 11, 20, 0.78) 0%,
+    rgba(8, 11, 20, 0.88) 65%,
+    #080b14 100%
+  );
+}
 
   .hero-left h1 {
     font-size: clamp(3.4rem, 14vw, 5.5rem);
@@ -1501,28 +1512,38 @@ img {
   }
 
   .hero-right {
-    order: 2;
-    display: flex;
-    flex-direction: column;
-    height: auto;
-    min-height: 0;
-    max-height: none;
-    padding-bottom: 28px;
-    overflow: visible;
-  }
+  order: 2;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: auto;
+  min-height: 0;
+  max-height: none;
+  padding-bottom: 28px;
+  overflow: visible;
+  background: transparent;
+}
 
-  .profile-image-container {
-    position: relative;
-    inset: auto;
-    height: 72svh;
-    min-height: 460px;
-    max-height: 720px;
-  }
+  .profile-cutout-motion {
+  position: relative;
+  inset: auto;
+  width: 100%;
+  height: 68svh;
+  min-height: 420px;
+  max-height: 620px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
 
-  .profile-image {
-    object-fit: contain;
-    object-position: center center;
-  }
+.profile-cutout {
+  height: 100%;
+  width: auto;
+  max-width: 100%;
+  object-fit: contain;
+  object-position: center bottom;
+  transform: translateX(0);
+}
 
   .hero-image-gradient {
     background: linear-gradient(
@@ -1777,4 +1798,265 @@ color: rgba(167, 139, 250, 0.25);
   inset: 0;
   width: 100%;
   height: 100%;
+}
+
+/* Silueta independiente sobre el fondo tecnológico */
+.profile-cutout-motion {
+  position: absolute;
+  inset: 0;
+  z-index: 12;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.profile-cutout {
+  display: block;
+  width: auto;
+  height: 88%;
+  max-width: 100%;
+  object-fit: contain;
+  object-position: center bottom;
+  transform: translateX(10%);
+  filter:
+  brightness(0.92)
+  drop-shadow(0 0 8px rgba(37, 99, 235, 0.12))
+  drop-shadow(0 0 18px rgba(37, 99, 235, 0.07));
+}
+
+
+/* Ajuste exclusivo para móviles */
+@media (max-width: 700px) {
+  .hero-mobile-layout {
+    position: relative;
+    isolation: isolate;
+  }
+
+  .hero-mobile-layout .hero-left {
+    position: relative;
+    z-index: 3;
+    background: linear-gradient(
+      180deg,
+      rgba(8, 11, 20, 0.62) 0%,
+      rgba(8, 11, 20, 0.48) 65%,
+      rgba(8, 11, 20, 0.92) 100%
+    );
+  }
+
+  /* Ocultamos la imagen original solo en móviles */
+  .hero-mobile-layout .hero-right > .profile-cutout-motion {
+    display: none;
+  }
+
+  /* Silueta de fondo con animación ascendente */
+  .hero-mobile-layout::after {
+    content: "";
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 720px;
+
+    background-image: url("/images/fernando-cutout.png");
+    background-repeat: no-repeat;
+    background-position: right bottom;
+    background-size: auto 690px;
+    opacity: 1;
+    filter: drop-shadow(0 0 22px rgba(37, 99, 235, 0.25));
+    pointer-events: none;
+    animation: mobileProfileRise 2.2s
+  cubic-bezier(0.22, 1.8, 0.36, 1) 0.4s both;
+  }
+
+  .hero-mobile-layout .hero-left {
+    z-index: 2;
+  }
+
+  .hero-mobile-layout .hero-watermark {
+    z-index: 2;
+  }
+
+  .hero-mobile-layout .hero-right {
+    z-index: 3;
+  }
+}
+
+@keyframes mobileProfileRise {
+  0% {
+    opacity: 0;
+    transform: translateY(380px) scale(0.72);
+    filter: brightness(0.45) blur(5px);
+  }
+
+  55% {
+    opacity: 1;
+    transform: translateY(-12px) scale(1.04);
+    filter: brightness(1.15) blur(0);
+  }
+
+  75% {
+    transform: translateY(5px) scale(0.99);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: brightness(1.08) blur(0);
+  }
+}
+
+
+
+
+/* CV: botón dorado con efecto gloss */
+.btn-download-cv {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+padding: 10px 18px;
+border-radius: 16px;
+font-size: 0.9rem;
+  border: 1px solid rgba(255, 245, 190, 0.9);
+
+  background: linear-gradient(
+    135deg,
+    #ffe9a3 0%,
+    #e7c65c 28%,
+    #c99a20 55%,
+    #f8df87 78%,
+    #d4af37 100%
+  );
+
+  color: #17130a;
+  font-weight: 800;
+  letter-spacing: 0.6px;
+  text-decoration: none;
+
+  box-shadow:
+    0 5px 0 #94701b,
+    0 9px 22px rgba(212, 175, 55, 0.3),
+    inset 0 1px 1px rgba(255, 255, 255, 0.8);
+
+  animation: cvButtonFloat 2.4s ease-in-out infinite;
+
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    filter 0.25s ease;
+}
+
+/* Reflejo de luz que atraviesa el botón */
+.btn-download-cv::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: -50%;
+  left: -75%;
+  width: 45%;
+  height: 200%;
+
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.15) 20%,
+    rgba(255, 255, 255, 0.95) 50%,
+    rgba(255, 255, 255, 0.2) 80%,
+    transparent
+  );
+
+  transform: skewX(-22deg);
+  animation: cvGloss 2.8s ease-in-out infinite;
+  pointer-events: none;
+}
+
+/* Ícono de descarga */
+.cv-download-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  animation: cvIconBounce 1.2s ease-in-out infinite;
+}
+
+/* Movimiento del botón */
+@keyframes cvButtonFloat {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
+}
+
+/* Destello continuo */
+@keyframes cvGloss {
+  0%, 15% {
+    left: -75%;
+  }
+  65%, 100% {
+    left: 140%;
+  }
+}
+
+/* Rebote del ícono */
+@keyframes cvIconBounce {
+  0%, 100% {
+    transform: translateY(-2px);
+  }
+  50% {
+    transform: translateY(4px);
+  }
+}
+
+/* Interacción al pasar el cursor */
+.btn-download-cv:hover {
+  transform: translateY(-4px) scale(1.02);
+  filter: brightness(1.12);
+
+  box-shadow:
+    0 7px 0 #94701b,
+    0 15px 35px rgba(212, 175, 55, 0.55),
+    0 0 22px rgba(255, 224, 130, 0.35),
+    inset 0 1px 2px rgba(255, 255, 255, 0.9);
+}
+
+.btn-download-cv:hover .cv-download-icon {
+  animation: cvIconClick 0.45s ease-in-out;
+}
+
+@keyframes cvIconClick {
+  0% {
+    transform: translateY(-3px);
+  }
+  45% {
+    transform: translateY(7px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+.btn-download-cv:focus-visible {
+  outline: 3px solid #ffffff;
+  outline-offset: 5px;
+}
+
+/* Respeta la preferencia de movimiento reducido */
+@media (prefers-reduced-motion: reduce) {
+  .btn-download-cv,
+  .btn-download-cv::before,
+  .cv-download-icon {
+    animation: none;
+  }
+
+  .btn-download-cv {
+    transition: none;
+  }
 }
