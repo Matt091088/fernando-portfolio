@@ -11,7 +11,7 @@ I'm a Frontend Developer focused on React and JavaScript, building real-world we
 
 ## 📸 Preview
 
-![Fernando Tau Portfolio](./public/images/portfolio-home.png)
+![Fernando Tau Portfolio](.images/portfolio-home.png)
 
 ## ✨ Features
 
