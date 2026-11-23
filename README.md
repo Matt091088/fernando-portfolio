@@ -1,16 +1,45 @@
-# React + Vite
+# Personal Portfolio
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A personal web portfolio built with React and Vite.
 
-Currently, two official plugins are available:
+## 👨‍💻 About the Project
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+This portfolio showcases my profile as a web developer, my technical skills, education and projects.
 
-## React Compiler
+It was created to present my work, share my learning journey and connect with potential employers and collaborators.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## ✨ Features
 
-## Expanding the ESLint configuration
+- Personal introduction and developer profile
+- Technical skills section
+- Education and certifications
+- Featured development projects
+- Contact section
+- Animated visual elements
+- Responsive design
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## 🛠️ Technologies
+
+- React
+- JavaScript
+- Vite
+- CSS
+- Framer Motion
+- React Icons
+
+## 🌐 Live Demo
+
+[Visit My Portfolio](https://fernando-portfolio-ruby.vercel.app/)
+
+## 💻 Run Locally
+
+1. Clone the repository:
+
+   ```bash
+   git clone https://github.com/Matt091088/fernando-portfolio.git
+
+   cd fernando-portfolio
+
+   npm install
+
+   npm run dev
