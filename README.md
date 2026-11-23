@@ -8,6 +8,10 @@ This portfolio showcases my profile as a web developer, my technical skills, edu
 
 It was created to present my work, share my learning journey and connect with potential employers and collaborators.
 
+## 📸 Preview
+
+![Personal Portfolio - Homepage](portfolio-home.png)
+
 ## ✨ Features
 
 - Personal introduction and developer profile
