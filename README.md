@@ -1,49 +1,86 @@
-# Personal Portfolio
 
-A personal web portfolio built with React and Vite.
+# Fernando Tau | Frontend Developer
 
-## 👨‍💻 About the Project
+Personal portfolio showcasing my web development projects, technical skills, education and certifications.
 
-This portfolio showcases my profile as a web developer, my technical skills, education and projects.
+I'm a Frontend Developer focused on React and JavaScript, building real-world web projects while continuing my Software Development education.
 
-It was created to present my work, share my learning journey and connect with potential employers and collaborators.
+## 🌐 Live Portfolio
+
+[Visit my Portfolio](https://fernando-portfolio-ruby.vercel.app/)
 
 ## 📸 Preview
 
-![Personal Portfolio - Homepage](portfolio-home.png)
+![Fernando Tau Portfolio](./public/images/portfolio-preview.png)
 
 ## ✨ Features
 
-- Personal introduction and developer profile
-- Technical skills section
-- Education and certifications
-- Featured development projects
-- Contact section
-- Animated visual elements
-- Responsive design
+- Bilingual interface (English and Spanish).
+- Responsive navigation menu.
+- Animated introductory screen.
+- Animated hero section and visual elements.
+- About Me section.
+- Education and certifications section with PDF links.
+- Technical skills section.
+- Featured projects with descriptions and technology lists.
+- Links to live demos and GitHub repositories.
+- Downloadable CV in English and Spanish.
+- Contact section with email, GitHub and LinkedIn links.
+- Scroll-based animations and interactive transitions.
 
 ## 🛠️ Technologies
 
-- React
+- React 19
 - JavaScript
-- Vite
-- CSS
+- Vite 8
+- CSS3
 - Framer Motion
 - React Icons
+- ESLint
 
-## 🌐 Live Demo
+## 🚀 Getting Started
 
-[Visit My Portfolio](https://fernando-portfolio-ruby.vercel.app/)
-
-## 💻 Run Locally
+To run this project locally:
 
 1. Clone the repository:
 
-   ```bash
-   git clone https://github.com/Matt091088/fernando-portfolio.git
+```bash
+git clone https://github.com/Matt091088/fernando-portfolio.git
+```
 
-   cd fernando-portfolio
+2. Navigate to the project folder:
 
-   npm install
+```bash
+cd fernando-portfolio
+```
 
-   npm run dev
+3. Install dependencies:
+
+```bash
+npm install
+```
+
+4. Start the development server:
+
+```bash
+npm run dev
+```
+
+## 📂 Project Structure
+
+```text
+src/
+├── assets/
+├── i18n/
+├── App.jsx
+├── App.css
+├── index.css
+└── main.jsx
+```
+
+## 👨‍💻 Development
+
+Designed and developed independently by me, with AI-assisted guidance throughout the development process.
+
+This portfolio represents my ongoing journey in frontend development, combining practical projects, continuous learning and a focus on modern user interfaces.
+
